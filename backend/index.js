@@ -1,7 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+
+const tasksRoutes = require("./routes/tasks");
+const usersRoutes = require("./routes/users");
+const jwtRoutes = require("./routes/jwt");
+const bodyParser = require('body-parser');
+
+
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -41,31 +48,19 @@ async function connectDB() {
 }
 connectDB();
 
-// Routes
-app.post('/new-task', async (req, res) => {
-  try {
-    const newTask = req.body;
-    console.log("📌 New Task:", newTask);
-    const result = await global.tasksCollection.insertOne(newTask);
-    res.send(result);
-  } catch (error) {
-    console.error("🚨 Error inserting task:", error);
-    res.status(500).send({ message: "Failed to add task" });
-  }
-});
 
-app.get('/tasks', async (req, res) => {
-  try {
-    const tasks = await tasksCollection.find().toArray();
-    res.send(tasks);
-  } catch (error) {
-    console.error("🚨 Error fetching tasks:", error);
-    res.status(500).send({message: "Failed to fetch tasks"});
 
-  }
 
-})
 
+
+
+
+
+
+
+app.use("/", tasksRoutes);
+app.use("/", usersRoutes);
+app.use("/", jwtRoutes);
 
 
 
