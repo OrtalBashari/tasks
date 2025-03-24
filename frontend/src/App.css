@@ -1,0 +1,8 @@
+.dark {
+    background-color: rgba(0, 0, 0, 0.839);
+    color: white;
+}
+
+.dark nav {
+    background-color: rgba(11, 10, 10, 0.672);
+}
