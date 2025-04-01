@@ -42,7 +42,11 @@ const NavBar = () => {
     }, [isDarkMode]);
 
     return (
+        <div>
+         
+
         <nav className={`w-full flex justify-center items-center py-4 bg-white dark:bg-gray-800 shadow-md`}>
+            
             <div className="flex items-center space-x-6">
                 {/* לוגו */}
                 <div className="flex items-center">
@@ -71,6 +75,8 @@ const NavBar = () => {
                         onChange={() => setIsDarkMode(!isDarkMode)}
                     />
                 </div>
+
+                
 
                 {/* תפריט למובייל */}
                 <div className="md:hidden">
@@ -111,6 +117,11 @@ const NavBar = () => {
                 </ul>
             </div>
         </nav>
+
+        <div className="flex justify-center bg-blue-300 text-3xl font-poppins font-bold bg-opacity-15 p-1 ">
+      Your Day, Your Tasks, Your Way
+      </div>
+        </div>
     );
 };
 
