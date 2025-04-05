@@ -7,7 +7,11 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Home = () => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const goToAddTask = (taskName) => {
+    navigate(`/add-task/${taskName}`);
+  }
 
   return (
     <div>
@@ -71,28 +75,66 @@ const Home = () => {
       <div className="text-center mb-11 text-black dark:text-white mt-4 font-bold text-3xl">
         <h2>Choose Your Options</h2>
 
+
+
+
+
+
+
+
+
+
         {/* Cards of tasks */}
       <div className="flex flex-wrap justify-center gap-10 mt-10 px-4">
         
+      <div>
+
         {/* Card 1 */}
-        <div className="relative w-[350px] h-[250px] p-6 rounded-lg shadow-lg flex items-center bg-green-100 dark:bg-gray-700 overflow-hidden">
+        <div className="relative w-[400px] h-[300px] p-6 rounded-lg shadow-lg flex items-center bg-[#f7f7e190]
+           dark:bg-gray-800 overflow-hidden">
+
           
-          <div className="relative z-10 w-1/2 ">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Daily Planner</h3>
-            <p className="text-gray-700 text-sm mt-2 dark:text-white">Take control of your day—set your goals, prioritize tasks, and make every hour count</p>
+          <div className="flex flex-col z-10 w-1/2">
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white -mt-12">Daily Planner</h3>
+            <p className="text-gray-700 text-sm mt-6 dark:text-white ">Take control of your day- <br />
+              set your goals, prioritize tasks, and make every hour count</p>
           </div>
           
           <img src="/daily_02.png" alt="Daily Planner"
-              className="absolute right-0 top-0 h-full w-1/2 object-cover rounded-r-3xl bg-white  rounded-full shadow-md
+              className="absolute right-0 top-0 h-full w-1/2 object-cover rounded-r-3xl bg-white  rounded-full shadow-xl hover:shadow-2xl transition-shadow duration-300
+
       " />
+
+      
+
+    
         </div>
-        
+
+        <div className="text-center mt-6"> {/* Container לכפתור */}
+      <button
+        className="px-6 py-2 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition duration-300"
+        onClick={() => goToAddTask("dailyPlanner")}
+      >
+        Get Start!
+      </button>
+    </div>
+    </div>
+
+
+
+
+
+     
+
+     
+
+        <div>
         {/* Card 2 */}
-        <div className="relative w-[350px] h-[250px] p-6 rounded-lg shadow-lg flex items-center bg-green-100 dark:bg-gray-700 overflow-hidden">
-          
+        <div className="relative w-[400px] h-[300px] p-6 rounded-lg shadow-lg flex items-center bg-[#f7f7e190] dark:bg-gray-800 overflow-hidden">
+
           <div className="relative z-10 w-1/2 ">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Eisenhower Matrix</h3>
-            <p className="text-gray-700 text-sm mt-2 dark:text-white">
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white -mt-6">Eisenhower Matrix</h3>
+            <p className="text-gray-700 text-sm mt-4 dark:text-white">
             Stop wasting time on unimportant tasks! With the Eisenhower Matrix,
              you can separate urgency from importance and act smarter
 
@@ -100,28 +142,65 @@ const Home = () => {
             </p>
           </div>
           
-          <img src="/clock.jpg" alt="Daily Planner"
-              className="absolute right-0 top-0 h-full w-1/2 object-cover rounded-r-2xl bg-white rounded-full shadow-md
-      " />
-        </div>
-        {/* Card 3 */}
+          <img src="/clock.jpg" alt="Eisenhower Matrix"
+              className="absolute right-0 top-0 h-full w-1/2 object-cover rounded-r-2xl bg-white rounded-full shadow-xl hover:shadow-2xl transition-shadow duration-300
 
-        <div className="relative w-[350px] h-[250px] p-6 rounded-lg shadow-lg flex items-center bg-green-100 dark:bg-gray-700 overflow-hidden">
+      " />
+      </div>
+
+        
+
+        <div className="text-center mt-6">
+  <button
+    className="px-6 py-2 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition duration-300"
+    onClick={() => {
+      goToAddTask("eisenhowerMatrix");
+    }}
+  >
+    Get Start!
+  </button>
+</div>
+</div>
+
+
+        {/* Card 3 */}
+        <div>
+        <div className="relative w-[400px] h-[300px] p-6 rounded-lg shadow-lg flex items-center bg-[#f7f7e190] dark:bg-gray-800 overflow-hidden">
           
-          <div className="relative z-10 w-1/2 ">
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">Daily Planner</h3>
-            <p className="text-gray-700 text-sm mt-2 dark:text-white">Take control of your day—set your goals, prioritize tasks, and make every hour count</p>
+          <div className="flex flex-col z-10 w-1/2 ">
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white -mt-16">Task Categories
+            </h3>
+            <p className="text-gray-700 text-sm mt-6 dark:text-white">
+            Organize your tasks by topic or area of life, and stay more focused
+            </p>
           </div>
           
-          <img src="/daily.png" alt="Daily Planner"
-              className="absolute right-0 top-0 h-full w-1/2 object-cover rounded-r-3xl bg-white p-2 rounded-full shadow-md
+          <img src="/Task_Organization.jpg" alt="Task_Organization.jpg"
+              className="absolute right-0 top-0 h-full w-1/2 object-cover rounded-r-2xl bg-white rounded-full
+            shadow-xl hover:shadow-2xl transition-shadow duration-300
+
+      
+      
       " />
         </div>
+
+        <div className="text-center mt-6">
+  <button
+    className="px-6 py-2 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition duration-300"
+    onClick={() => {
+      goToAddTask("taskCategories");
+    }}
+  >
+    Get Start!
+  </button>
+</div>
+</div>
   
 
 
 
 </div>
+
 
 
 
