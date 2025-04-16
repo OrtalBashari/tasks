@@ -6,6 +6,9 @@ import Signup from '../pages/LogIn/Signup.jsx';
 import SignIn from '../pages/LogIn/SignIn.jsx';
 import Task from '../pages/Task/Task.jsx';
 import Profile from '../pages/Profile/Profile.jsx';
+import DailyPlanner from '../pages/Task/DailyPlanner.jsx';
+import EisenhowerMatrix from '../pages/Task/EisenhowerMatrix.jsx';
+import TaskCategories from '../pages/Task/TaskCategories.jsx';
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +34,20 @@ export const router = createBrowserRouter([
         {
           path: "Profile",
           element: <Profile />
+        },
+        {
+          path: "daily-planner",
+          element: <DailyPlanner />
+        },
+        {
+          path: "eisenhower-matrix",
+          element: <EisenhowerMatrix />
+        },
+        {
+          path: "task-categories",
+          element: <TaskCategories />
         }
+
     ]
   },
 ]);

@@ -10,8 +10,21 @@ const Home = () => {
   const navigate = useNavigate();
 
   const goToAddTask = (taskName) => {
-    navigate(`/add-task/${taskName}`);
-  }
+    switch(taskName) {
+      case 'dailyPlanner':
+        navigate('/daily-planner');
+        break;
+      case 'eisenhowerMatrix':
+        navigate('/eisenhower-matrix');
+        break;
+      case 'taskCategories':
+        navigate('/task-categories');
+        break;
+      default:
+        break;
+    }
+    
+  };
 
   return (
     <div>
@@ -110,7 +123,7 @@ const Home = () => {
     
         </div>
 
-        <div className="text-center mt-6"> {/* Container לכפתור */}
+        <div className="text-center mt-2"> {/* Container לכפתור */}
       <button
         className="px-6 py-2 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition duration-300"
         onClick={() => goToAddTask("dailyPlanner")}
