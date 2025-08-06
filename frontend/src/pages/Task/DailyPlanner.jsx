@@ -112,7 +112,18 @@ const DailyPlanner = () => {
 
   return (
     <div className="p-8 ">
-       <div className="flex justify-start mb-4">
+
+   
+
+
+    <header className="fixed top-0 left-0 w-full bg-slate-100 text-white p-2 text-center z-10 shadow-lg">
+
+      
+
+    <h1 className="p-2 text-4xl font-bold mb-6 text-blue-700 flex justify-center bg-slate-100">
+       Daily Planner</h1>
+    
+    <div className="flex justify-start mb-4">
   <button
     onClick={() => navigate('/')}
     className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded shadow"
@@ -120,10 +131,11 @@ const DailyPlanner = () => {
     ← Back to Home
   </button>
 </div>
+    
+    </header>
 
+    <div className="pt-40">
 
-
-    <h1 className="text-4xl font-bold mb-6 text-blue-700 flex justify-center bg-slate-100"> Daily Planner</h1>
     <form onSubmit={handleAddtask} className="flex flex-col max-w-md mx-auto mb-10">
         <select
         value={day}
@@ -166,6 +178,8 @@ const DailyPlanner = () => {
         {editingTaskId ? 'Update Task': 'Add Task'}
         </button>
     </form>
+    </div>
+
 
     {/* List of the tasks */}
     <div className="overflow-x-auto">

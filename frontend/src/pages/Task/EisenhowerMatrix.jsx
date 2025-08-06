@@ -5,6 +5,10 @@ const EisenhowerMatrix = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
   const [priority, setPriority] = useState('importantUrgent');
+  const [editingTaskId, setEditingTaskId] = useState(null);
+  const [editedTaskTitle, setEditedTaskTitle] = useState('');
+  const [taskToDelete, setTaskToDelete] = useState(null);
+  const [showDeleteModel, setShowDeleteModel] = useState(false); 
 
 
 
@@ -40,23 +44,117 @@ const EisenhowerMatrix = () => {
     setTasks(tasks.filter(task => task.id !== id));
   };
 
+  const startEditing = (task) => {
+    setEditingTaskId(task.id);
+    setEditedTaskTitle(task.title);
+  };
+  
+  const handleSaveEdit = (taskId) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, title: editedTaskTitle } : task
+    );
+    setTasks(updatedTasks);
+    setEditingTaskId(null);
+    setEditedTaskTitle('');
+  };
+  
+  const confirmDeleteTask = (task) => {
+    setTaskToDelete(task);
+    setShowDeleteModel(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (taskToDelete) {
+      setTasks(tasks.filter(task => task.id !== taskToDelete.id));
+      setTaskToDelete(null);
+      setShowDeleteModel(false);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setTaskToDelete(null);
+    setShowDeleteModel(false);
+  };
+
+  const handleChangePriority = (taskId, newPriority) => {
+    const updatedTasks = tasks.map(task =>
+      task.id === taskId ? {...task, priority: newPriority} : task
+    );
+    setTasks(updatedTasks);
+  };
+
   const renderTasks = (criteria) =>
     tasks
       .filter(task => task.priority === criteria)
       .map(task => (
-        <div
-          key={task.id}
-          className="border p-2 rounded mb-2 flex justify-between items-center bg-white shadow-sm"
-        >
-          <span>{task.title}</span>
-          <button
-            onClick={() => deleteTask(task.id)}
-            className="text-red-500 hover:text-red-700 font-bold ml-4"
-          >
-            ✕
-          </button>
+        <div key={task.id} className="border p-2 rounded mb-2 flex justify-between items-center">
+          {editingTaskId === task.id ? (
+            <div className="flex w-full gap-2">
+              <input
+                value={editedTaskTitle}
+                onChange={(e) => setEditedTaskTitle(e.target.value)}
+                className="flex-grow p-1 border rounded"
+              />
+              <button
+                onClick={() => handleSaveEdit(task.id)}
+                className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
+              >
+                Save
+              </button>
+              <button
+                onClick={() => setEditingTaskId(null)}
+                className="bg-gray-400 text-white px-2 py-1 rounded hover:bg-gray-500"
+              >
+                Cancel
+              </button>
+              <button 
+              onClick={() => confirmDeleteTask(task)}
+              className="text-sm text-red-600 hover:underline ml-2"
+              >
+
+              Delete
+              </button>
+            </div>
+          ) : (
+            <>
+              <span>{task.title}</span>
+              <button
+                onClick={() => startEditing(task)}
+                className="text-sm text-blue-600 hover:underline ml-2"
+              >
+                Edit
+              </button>
+
+              <button 
+              onClick={() => confirmDeleteTask(task)}
+              className="text-sm text-red-600 hover:underline ml-2"
+              >
+
+              Delete
+              </button>
+              <select 
+              value={task.priority}
+              onChange={(e) => handleChangePriority(task.id, e.target.value)}
+              className="ml-2 border rounded p-1 text-sm"
+
+              >
+                  <option value="importantUrgent">Important & Urgent</option>
+                  <option value="importantNotUrgent">Important & Not Urgent</option>
+                  <option value="notImportantUrgent">Not Important & Urgent</option>
+                  <option value="notImportantNotUrgent">Not Important & Not Urgent</option>
+
+              </select>
+
+             
+            
+            </>
+            
+          )}
         </div>
       ));
+
+     
+  
 
   return (
     <div className="p-8">
@@ -125,6 +223,36 @@ const EisenhowerMatrix = () => {
           {renderTasks('notImportantNotUrgent')}
         </div>
       </div>
+
+      {showDeleteModel && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
+          <div className="bg-white p-6 rounded shadow-md text-center space-y-4">
+            <p className="text-lg font-semibold"> Are you sure you want to delete this task ? </p>
+            <div className="flex justify-center gap-4">
+              <button
+              onClick={handleConfirmDelete}
+              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              >
+                Yes, Delete
+              </button>
+
+              <button
+              onClick={handleCancelDelete}
+              className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+        </div>
+      )
+
+      }
     </div>
   );
 };

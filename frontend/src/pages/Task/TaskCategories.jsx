@@ -5,6 +5,7 @@ const TaskCategories = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
   const [category, setCategory] = useState('work');
+  const [selectedTab, setSelectedTab] = useState('work');
 
   const addTask = (e) => {
     e.preventDefault();
@@ -19,9 +20,17 @@ const TaskCategories = () => {
 
 
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold mb-6 text-green-600 flex justify-center">Task Categories</h1>
-      <form onSubmit={addTask} className="max-w-md mx-auto mb-8 space-y-2">
+    <div className="p-8 max-w-2xl mx-auto">
+
+      <header className="fixed top-0 left-0 w-full bg-slate-100 text-white p-4 z-10 shadow-lg text-center">
+      <h1 className="p-2 text-4xl font-bold mb-6 text-green-600 flex justify-center">Task Categories (tabs)</h1>
+
+      </header>
+
+      <div className="pt-28">
+
+
+      <form onSubmit={addTask} className="mb-8 space-y-2">
         <input 
         type="text" 
         placeholder="Enter task"
@@ -46,6 +55,37 @@ const TaskCategories = () => {
           Add Task 
         </button>
       </form>
+
+      {/* Tabs*/}
+      <div className="flex justify-center mb-4 space-x-4">
+        {categories.map((cat) => (
+          <button 
+          key={cat}
+          onClick={() => setSelectedTab(cat)}
+          className={`px-4 py-2 rounded font-semibold ${
+            selectedTab === cat 
+            ? 'bg-green-600 text-white'
+            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+          }`}
+          >
+            {cat}
+
+          </button>
+        )
+
+        )}
+
+
+      </div>
+
+      {/*Task List */}
+      <div className="">
+
+
+      </div>
+
+      </div>
+
 
 
       <div>
